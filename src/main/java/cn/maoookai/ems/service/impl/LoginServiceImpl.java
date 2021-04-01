@@ -22,11 +22,15 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginVO login(@NotNull LoginDTO dto) {
         LoginVO loginVO = new LoginVO();
-        if (userRepository.findById(dto.getId()).isEmpty()) {
+        if (dto.getId().isEmpty()){
+            loginVO.setSuccess(false);
+            return loginVO;
+        }
+        if (userRepository.findById(Long.valueOf(dto.getId())).isEmpty()) {
             loginVO.setSuccess(false);
             loginVO.setMessage("该用户不存在！");
         } else {
-            User user = userRepository.findById(dto.getId()).get();
+            User user = userRepository.findById(Long.valueOf(dto.getId())).get();
             if (user.getPassword().equals(dto.getPassword())) {
                 loginVO.setAdmin(user.isAdmin());
                 loginVO.setNeedModifyPassword(user.isNeedModifyPassword());
