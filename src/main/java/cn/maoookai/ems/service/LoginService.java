@@ -1,9 +1,10 @@
 package cn.maoookai.ems.service;
 
 import cn.maoookai.ems.to.LoginDTO;
+import cn.maoookai.ems.to.LoginVO;
 
 public interface LoginService {
 
-    String login(LoginDTO dto);
+    LoginVO login(LoginDTO dto);
 
 }
