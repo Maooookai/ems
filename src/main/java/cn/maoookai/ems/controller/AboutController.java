@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AboutController {
 
     @GetMapping("/about")
-    public ModelAndView about(ModelAndView modelAndView){
+    public ModelAndView about(ModelAndView modelAndView) {
         modelAndView.setViewName("about");
         return modelAndView;
     }

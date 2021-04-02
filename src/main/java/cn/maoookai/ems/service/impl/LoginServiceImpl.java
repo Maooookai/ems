@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginVO login(@NotNull LoginDTO dto) {
         LoginVO loginVO = new LoginVO();
-        if (dto.getId().isEmpty()){
+        if (dto.getId().isEmpty()) {
             loginVO.setSuccess(false);
             return loginVO;
         }

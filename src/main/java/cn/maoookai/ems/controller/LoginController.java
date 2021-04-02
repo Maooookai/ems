@@ -42,13 +42,15 @@ public class LoginController {
         LoginVO loginVO = loginService.login(loginDTO);
 
         if (!loginVO.isSuccess()) {
-            modelAndView.addObject("error", "用户名或密码错误！");
+            modelAndView.addObject("error", loginVO.getMessage());
             modelAndView.setViewName("index");
             return modelAndView;
         }
 
-        modelAndView.addObject("id", loginDTO.getId());
-        modelAndView.setViewName("/user/home");
+        if (loginVO.isAdmin())
+            modelAndView.setViewName("/admin/home");
+        else
+            modelAndView.setViewName("/user/home");
         return modelAndView;
     }
 
