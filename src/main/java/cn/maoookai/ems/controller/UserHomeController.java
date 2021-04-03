@@ -19,7 +19,20 @@ public class UserHomeController {
 
     @RequestMapping(value = "/home", name = "用户主页")
     public ModelAndView userHome(ModelAndView modelAndView) {
-        modelAndView.setViewName("user/home");
+        modelAndView.setViewName("/user/home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/exit")
+    public ModelAndView exit(ModelAndView modelAndView){
+        modelAndView.clear();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/error")
+    public ModelAndView error(ModelAndView modelAndView){
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 

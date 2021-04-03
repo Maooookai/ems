@@ -1,6 +1,8 @@
 package cn.maoookai.ems.controller;
 
+import cn.maoookai.ems.service.BoardService;
 import cn.maoookai.ems.service.LoginService;
+import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.LoginDTO;
 import cn.maoookai.ems.to.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,38 +21,40 @@ import java.util.Objects;
 public class LoginController {
 
     LoginService loginService;
+    UserService userService;
+    BoardService boardService;
 
     @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, UserService userService, BoardService boardService) {
         this.loginService = loginService;
+        this.userService = userService;
+        this.boardService = boardService;
     }
 
     @GetMapping("/login")
     public ModelAndView login(ModelAndView modelAndView) {
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
     @PostMapping("/login")
-    public ModelAndView login(ModelAndView modelAndView, @Valid LoginDTO loginDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            modelAndView.addObject("error", Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
-            modelAndView.setViewName("index");
-            return modelAndView;
-        }
+    public ModelAndView login(ModelAndView modelAndView, @Valid LoginDTO loginDTO) {
 
+        modelAndView.addObject("board", boardService.latestBoard());
         LoginVO loginVO = loginService.login(loginDTO);
 
         if (!loginVO.isSuccess()) {
             modelAndView.addObject("error", loginVO.getMessage());
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("login");
             return modelAndView;
         }
 
         if (loginVO.isAdmin())
             modelAndView.setViewName("/admin/home");
-        else
+        else {
             modelAndView.setViewName("/user/home");
+            modelAndView.getModel().put("user", userService.info(Long.parseLong(loginDTO.getId())));
+        }
         return modelAndView;
     }
 

@@ -23,4 +23,7 @@ public class Board {
     @Column(name = "update_time")
     private String updateTime;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
 }
