@@ -41,7 +41,4 @@ public class User {
     @Column(name = "register_time")
     private String registerTime;
 
-    @Column(name = "need_modify_password")
-    private boolean needModifyPassword;
-
 }

@@ -33,7 +33,6 @@ public class LoginServiceImpl implements LoginService {
             User user = userRepository.findById(Long.valueOf(dto.getId())).get();
             if (user.getPassword().equals(dto.getPassword())) {
                 loginVO.setAdmin(user.isAdmin());
-                loginVO.setNeedModifyPassword(user.isNeedModifyPassword());
                 loginVO.setSuccess(true);
             } else {
                 loginVO.setSuccess(false);
