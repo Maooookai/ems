@@ -12,7 +12,8 @@ import javax.servlet.http.HttpSession;
 public class ProfileController {
 
     @RequestMapping(value = "/profile",name = "个人资料")
-    public ModelAndView profile(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView profile(ModelAndView modelAndView){
+        modelAndView.setViewName("/user/profile");
         return modelAndView;
     }
 
