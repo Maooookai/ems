@@ -1,5 +1,6 @@
 package cn.maoookai.ems.controller.user;
 
+import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class HomeController {
 
     @RequestMapping(value = "/home", name = "用户主页")
     public ModelAndView userHome(ModelAndView modelAndView, HttpSession session) {
-        if (session.getAttribute("user.id") == null)
+        User user = (User) session.getAttribute("userinfo");
+        if (user.getId() == null)
             modelAndView.setViewName("/login");
         else
             modelAndView.setViewName("/user/home");
@@ -38,7 +40,7 @@ public class HomeController {
 
     @RequestMapping(value = "/error")
     public ModelAndView error(ModelAndView modelAndView) {
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
 

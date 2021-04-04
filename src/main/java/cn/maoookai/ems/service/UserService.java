@@ -10,4 +10,6 @@ public interface UserService {
 
     UserVO info(long id);
 
+    User getUserById(long id);
+
 }

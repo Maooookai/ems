@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,7 +39,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid LoginDTO loginDTO, HttpSession session) {
-        
+
         LoginVO loginVO = loginService.login(loginDTO);
         session.setAttribute("board", boardService.latestBoard());
         session.setAttribute("user", loginVO);
@@ -52,7 +53,7 @@ public class LoginController {
         if (loginVO.isAdmin())
             modelAndView.setViewName("/admin/home");
         else {
-            session.setAttribute("user", userService.info(Long.parseLong(loginDTO.getId())));
+            session.setAttribute("userinfo", userService.getUserById(Long.parseLong(loginDTO.getId())));
             modelAndView.setViewName("/user/home");
         }
         return modelAndView;
