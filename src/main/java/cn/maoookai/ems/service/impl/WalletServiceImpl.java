@@ -4,6 +4,9 @@ import cn.maoookai.ems.entity.Wallet;
 import cn.maoookai.ems.repository.WalletRepository;
 import cn.maoookai.ems.service.WalletService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +26,8 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public Page<Wallet> paymentInfo(int page) {
-        return null;
+    public Page<Wallet> paymentInfo(int page, Long id) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("operateTime").descending());
+        return walletRepository.findAllByUserId(id, pageable);
     }
 }
