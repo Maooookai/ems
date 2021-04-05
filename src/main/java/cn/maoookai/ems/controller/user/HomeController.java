@@ -33,7 +33,7 @@ public class HomeController {
     @RequestMapping(value = "/exit")
     public ModelAndView exit(ModelAndView modelAndView, HttpSession session) {
         modelAndView.clear();
-        session.removeAttribute("user");
+        session.removeAttribute("userinfo");
         modelAndView.setViewName("login");
         return modelAndView;
     }

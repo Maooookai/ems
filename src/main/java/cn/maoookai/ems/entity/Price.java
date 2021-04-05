@@ -20,4 +20,7 @@ public class Price {
     @Column(name = "price")
     private String price;
 
+    @Column(name = "elect_type")
+    private boolean electType;
+
 }
