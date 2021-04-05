@@ -7,6 +7,6 @@ public interface WalletService {
 
     String currentBalance(Long id);
 
-    Page<Wallet> paymentInfo(int page);
+    Page<Wallet> paymentInfo(int page, Long id);
 
 }

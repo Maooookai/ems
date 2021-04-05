@@ -46,11 +46,69 @@
     <div class="jumbotron">
         <h2>我的钱包</h2>
         <h5>My Wallet</h5>
-        <a href="/user/wallet/balance"><button class="btn btn-default">余额查询</button></a>&nbsp;&nbsp;&nbsp;
-        <a href="/user/wallet/payment"><button class="btn btn-default active">账单查询</button></a>&nbsp;&nbsp;&nbsp;
-        <a href="/user/wallet/charge"><button class="btn btn-default">余额充值</button></a>&nbsp;&nbsp;&nbsp;
+        <a href="/user/wallet/balance">
+            <button class="btn btn-default">余额查询</button>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/user/wallet/payment">
+            <button class="btn btn-default active">账单查询</button>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/user/wallet/charge">
+            <button class="btn btn-default">余额充值</button>
+        </a>&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
+        <h3>历史账单记录</h3>
+        <div class="with:80%">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>流水号</th>
+                    <th>账号</th>
+                    <th>原余额</th>
+                    <th>操作</th>
+                    <th>新余额</th>
+                    <th>操作时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="wallets : ${session.wallets}">
+                    <th scope="row" th:text="${wallets.id}"></th>
+                    <td th:text="${wallets.userId}"></td>
+                    <td th:text="${wallets.oldBalance}"></td>
+                    <td th:text="${wallets.operate}"></td>
+                    <td th:text="${wallets.newBalance}"></td>
+                    <td th:text="${wallets.operateTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+<div class="modal-footer no-margin-top">
+    <ul class="pagination pull-right no-margin">
+
+        <!-- 首页 -->
+        <li>
+            <a th:href="'/user/wallet/payment?pageNum=0'">第一页</a>
+        </li>
+
+        <!-- 上一页 -->
+        <li th:if="${session.wallets.hasPrevious()}">
+            <a th:href="'/user/wallet/payment?pageNum=' + ${session.wallets.previousPageable().getPageNumber()}"
+               th:text="上一页"></a>
+        </li>
+
+        <!-- 下一页 -->
+        <li th:if="${session.wallets.hasNext()}">
+            <a th:href="'/user/wallet/payment?pageNum=' + ${session.wallets.nextPageable().getPageNumber()}"
+               th:text="下一页"></a>
+        </li>
+
+        <!-- 尾页 -->
+        <li>
+            <a th:href="'/user/wallet/payment?pageNum=' + ${session.wallets.getTotalPages() - 1}">最后一页</a>
+        </li>
+
+    </ul>
 </div>
 </body>
 </html>

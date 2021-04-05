@@ -39,20 +39,22 @@
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" style="width: 180px" oninput="value=value.replace(/[^\d]/g,'')" placeholder="账号" th:name="id"
+                <input class="form-control" oninput="value=value.replace(/[^\d]/g,'')" placeholder="账号"
+                       style="width: 180px" th:name="id"
                        th:type="text">
             </div>
             <br>
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" style="width: 180px" placeholder="密码" th:name="password" th:type="password">
+                <input class="form-control" placeholder="密码" style="width: 180px" th:name="password" th:type="password">
             </div>
             <br>
             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;登录
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;重置</button>
+            <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;重置
+            </button>
         </form>
     </div>
 </div>
