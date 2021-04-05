@@ -19,24 +19,30 @@ public class WalletController {
         this.walletService = walletService;
     }
 
-    @RequestMapping("/wallet")
+    @RequestMapping(value = "/wallet")
     public ModelAndView wallet(ModelAndView modelAndView) {
         modelAndView.setViewName("/user/wallet");
         return modelAndView;
     }
 
-    @RequestMapping("/wallet/balance")
+    @RequestMapping(value = "/wallet/balance")
     public ModelAndView balance(ModelAndView modelAndView, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("balance", walletService.currentBalance(user.getId()));
         return modelAndView;
     }
 
-    @RequestMapping("/wallet/payment")
+    @RequestMapping(value = "/wallet/payment")
     public ModelAndView payment(ModelAndView modelAndView, @RequestParam(defaultValue = "0") int pageNum, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("wallets", walletService.paymentInfo(pageNum, user.getId()));
         modelAndView.setViewName("/user/wallet/payment");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/wallet/charge")
+    public ModelAndView charge(ModelAndView modelAndView) {
+        modelAndView.setViewName("/user/wallet/charge");
         return modelAndView;
     }
 
