@@ -24,7 +24,7 @@
         <div>
             <ul class="nav navbar-nav navbar-default">
                 <li><a href="/user/wallet">我的钱包</a></li>
-                <li class="active"><a href="/user/bill">电费查询</a></li>
+                <li class="active"><a href="/user/price">电费查询</a></li>
                 <li><a href="/user/usage">用电查询</a></li>
                 <li><a href="/user/board">公告查询</a></li>
             </ul>
@@ -51,9 +51,30 @@
     <div class="jumbotron">
         <h2>电费查询</h2>
         <h5>Electricity Fee Inquiry</h5>
-        <h3>今日<span th:text="${session.currentType}"></span>电价：<span th:text="${session.currentPrice.price}"></span>元/千瓦时</h3>
+        <h3>今日<span th:text="${session.currentType}"></span>电价：<span th:text="${session.currentPrice.price}"></span>元/千瓦时
+        </h3>
         <h3>您的今日电费：<span th:text="${session.currentDay}"></span>元</h3>
+        <h3>您的本月电费：<span th:text="${session.currentMonth}"></span>元</h3>
+        <form class="bs-example bs-example-form" method="post" th:action="@{/user/price}">
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <label for="month"></label><input class="form-control" id="month" style="width: 180px" th:name="month"
+                                                  type="month" value/>
+            </div>
+            <br>
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查询历史用电
+            </button>
+        </form>
+        <h3><span th:text="${session.historyBill}"></span></h3>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() < 10 ? "0" + (date.getMonth()) : (date.getMonth());
+        $("#month").attr("max", year + "-" + month);
+    })
+</script>
 </body>
 </html>

@@ -12,4 +12,5 @@ public interface CurrentUsageRepository extends JpaRepository<Current, Long> {
 
     @NotNull
     Optional<Current> findByUserId(@NotNull Long id);
+
 }

@@ -11,4 +11,6 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     Optional<Price> findFirstByElectTypeOrderByDateDesc(boolean type);
 
+    Optional<Price> findFirstByDateBeforeAndElectTypeOrderByDateDesc(String date, boolean type);
+
 }

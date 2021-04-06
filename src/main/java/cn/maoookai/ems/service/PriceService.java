@@ -9,4 +9,10 @@ public interface PriceService {
     String electType(boolean type);
 
     String currentDay(Long id, boolean type);
+
+    String currentMonth(Long id, boolean type);
+
+    String whichPrice(String date, boolean type);
+
+    String whichMonth(Long id, boolean type, String month);
 }
