@@ -3,10 +3,13 @@ package cn.maoookai.ems.service.impl;
 import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.repository.UserRepository;
 import cn.maoookai.ems.service.UserService;
+import cn.maoookai.ems.to.UserAddVO;
 import cn.maoookai.ems.to.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,5 +40,21 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findById(id).isPresent())
             return userRepository.findById(id).get();
         else return new User();
+    }
+
+    @Override
+    public void add(UserAddVO vo) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        User newUser = new User();
+        newUser.setName(vo.getName());
+        newUser.setAddress(vo.getAddress());
+        newUser.setAdmin(vo.isAdmin());
+        newUser.setGender(vo.getGender());
+        newUser.setElectType(vo.isElectType());
+        newUser.setPassword(vo.getPassword());
+        newUser.setPhoneNumber(vo.getPhone());
+        newUser.setIdNumber(vo.getIdNumber());
+        newUser.setRegisterTime(simpleDateFormat.format(new Date()));
+        userRepository.save(newUser);
     }
 }
