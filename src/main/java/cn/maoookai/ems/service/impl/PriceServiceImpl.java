@@ -91,7 +91,8 @@ public class PriceServiceImpl implements PriceService {
             used = Double.parseDouble(format.format(Double.parseDouble("0" + used * Double.parseDouble(whichPrice(month, type)))));
         else
             used = Double.parseDouble(format.format(used * Double.parseDouble(whichPrice(month, type))));
-        return "您" + month + "的账单为" + used;
+        return "您" + month + "的账单为" + used + "元";
+
     }
 
 }

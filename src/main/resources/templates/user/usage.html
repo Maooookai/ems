@@ -42,5 +42,32 @@
         </div>
     </div>
 </nav>
+<div class="container">
+    <div class="jumbotron">
+        <h2>用电量查询</h2>
+        <h5>Power Consumption Query</h5>
+        <h3>您今日用电量为<span th:text="${session.currentUsage}"></span>千瓦时</h3>
+        <h3>您本月用电量为<span th:text="${session.currentMonthUsage}"></span>千瓦时</h3>
+        <form class="bs-example bs-example-form" method="post" th:action="@{/user/usage}">
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <label for="month"></label><input class="form-control" id="month" style="width: 180px" th:name="month"
+                                                  type="month" value/>
+            </div>
+            <br>
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查询历史用电量
+            </button>
+        </form>
+        <h3><span th:text="${session.whichMonth}"></span></h3>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() < 10 ? "0" + (date.getMonth()) : (date.getMonth());
+        $("#month").attr("max", year + "-" + month);
+    })
+</script>
 </body>
 </html>
