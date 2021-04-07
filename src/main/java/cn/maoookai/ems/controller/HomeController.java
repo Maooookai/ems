@@ -1,4 +1,4 @@
-package cn.maoookai.ems.controller.user;
+package cn.maoookai.ems.controller;
 
 import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.service.UserService;
@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value = "/user", name = "用户")
 public class HomeController {
 
     UserService userService;
@@ -20,7 +19,7 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/home", name = "用户主页")
+    @RequestMapping(value = "/user/home", name = "用户主页")
     public ModelAndView userHome(ModelAndView modelAndView, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
         if (user.getId() == null)
@@ -30,15 +29,23 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/exit")
-    public ModelAndView exit(ModelAndView modelAndView, HttpSession session) {
+    @RequestMapping(value = "/user/exit")
+    public ModelAndView exitUser(ModelAndView modelAndView, HttpSession session) {
         modelAndView.clear();
         session.removeAttribute("userinfo");
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/error")
+    @RequestMapping(value = "/admin/exit")
+    public ModelAndView exitAdmin(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.clear();
+        session.removeAttribute("admininfo");
+        modelAndView.setViewName("/login");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/error")
     public ModelAndView error(ModelAndView modelAndView) {
         modelAndView.setViewName("/login");
         return modelAndView;

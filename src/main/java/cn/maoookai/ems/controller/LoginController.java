@@ -49,8 +49,10 @@ public class LoginController {
             return modelAndView;
         }
 
-        if (loginVO.isAdmin())
+        if (loginVO.isAdmin()) {
             modelAndView.setViewName("/admin/home");
+            session.setAttribute("admininfo", userService.getUserById(Long.parseLong(loginDTO.getId())));
+        }
         else {
             session.setAttribute("userinfo", userService.getUserById(Long.parseLong(loginDTO.getId())));
             modelAndView.setViewName("/user/home");
