@@ -6,6 +6,6 @@ public interface UsageService {
 
     String currentMonthUsage(Long id);
 
-    String whichMonthUsage(Long id,String month);
+    String whichMonthUsage(Long id, String month);
 
 }

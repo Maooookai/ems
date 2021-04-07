@@ -44,64 +44,12 @@
 </nav>
 <div class="container">
     <div class="jumbotron">
-        <h2>公告</h2>
-        <h5>Billboard</h5>
-        <div class="with:80%">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>作者</th>
-                    <th>内容</th>
-                    <th>更新时间</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="boards : ${session.boards}">
-                    <th scope="row" th:text="${boards.id}"></th>
-                    <td th:text="${boards.userId}"></td>
-                    <td style="max-width: 450px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
-                        th:text="${boards.content}"></td>
-                    <td th:text="${boards.updateTime}"></td>
-                    <td style="width: 20px">
-                        <form method="post" th:action="@{/user/boardInfo}">
-                            <input class="btn btn-default" th:name="boardId" th:value="${boards.id}" type="hidden"/>
-                            <button class="btn btn-default" type="submit">阅读</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <h2>公告详情</h2>
+        <h5>Announcement Details</h5>
+        <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
+        <br><br>
+        <p th:text="${session.board.content}"></p>
     </div>
-</div>
-<div class="modal-footer no-margin-top">
-    <ul class="pagination pull-right no-margin">
-
-        <!-- 首页 -->
-        <li>
-            <a th:href="'/user/board?pageNum=0'">第一页</a>
-        </li>
-
-        <!-- 上一页 -->
-        <li th:if="${session.boards.hasPrevious()}">
-            <a th:href="'/user/board?pageNum=' + ${session.boards.previousPageable().getPageNumber()}"
-               th:text="上一页"></a>
-        </li>
-
-        <!-- 下一页 -->
-        <li th:if="${session.boards.hasNext()}">
-            <a th:href="'/user/board?pageNum=' + ${session.boards.nextPageable().getPageNumber()}"
-               th:text="下一页"></a>
-        </li>
-
-        <!-- 尾页 -->
-        <li>
-            <a th:href="'/user/board?pageNum=' + ${session.boards.getTotalPages() - 1}">最后一页</a>
-        </li>
-
-    </ul>
 </div>
 </body>
 </html>

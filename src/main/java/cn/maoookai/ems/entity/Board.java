@@ -24,6 +24,6 @@ public class Board {
     private String updateTime;
 
     @Column(name = "is_deleted")
-    private boolean isDeleted;
+    private boolean deleted;
 
 }
