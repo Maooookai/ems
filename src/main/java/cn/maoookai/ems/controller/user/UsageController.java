@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "user")
 public class UsageController {
 
     UsageService usageService;
@@ -25,7 +25,7 @@ public class UsageController {
 
     @GetMapping(value = "/usage")
     public ModelAndView usage(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.setViewName("/user/usage");
+        modelAndView.setViewName("user/usage");
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("currentUsage", usageService.currentUsage(user.getId()));
         session.setAttribute("currentMonthUsage", usageService.currentMonthUsage(user.getId()));
@@ -34,7 +34,7 @@ public class UsageController {
 
     @PostMapping(value = "/usage")
     public ModelAndView whichMonth(ModelAndView modelAndView, DateVO vo, HttpSession session) {
-        modelAndView.setViewName("/user/usage");
+        modelAndView.setViewName("user/usage");
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("whichMonth", usageService.whichMonthUsage(user.getId(), vo.getMonth()));
         return modelAndView;

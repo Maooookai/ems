@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "admin")
 public class UserController {
 
     UserService userService;
@@ -24,13 +24,13 @@ public class UserController {
 
     @RequestMapping(value = "/user")
     public ModelAndView user(ModelAndView modelAndView) {
-        modelAndView.setViewName("/admin/user");
+        modelAndView.setViewName("admin/user");
         return modelAndView;
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     public ModelAndView add(ModelAndView modelAndView) {
-        modelAndView.setViewName("/admin/user/add");
+        modelAndView.setViewName("admin/user/add");
         return modelAndView;
     }
 

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class AboutController {
 
-    @GetMapping("/about")
+    @GetMapping("about")
     public ModelAndView about(ModelAndView modelAndView) {
         modelAndView.setViewName("about");
         return modelAndView;

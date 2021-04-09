@@ -7,15 +7,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class ProfileController {
 
-    @RequestMapping(value = "/user/profile", name = "个人资料")
+    @RequestMapping(value = "user/profile", name = "个人资料")
     public ModelAndView profileUser(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/profile");
+        modelAndView.setViewName("user/profile");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/profile", name = "个人资料")
+    @RequestMapping(value = "admin/profile", name = "个人资料")
     public ModelAndView profileAdmin(ModelAndView modelAndView) {
-        modelAndView.setViewName("/admin/profile");
+        modelAndView.setViewName("admin/profile");
         return modelAndView;
     }
 

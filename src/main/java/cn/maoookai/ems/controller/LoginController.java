@@ -7,8 +7,8 @@ import cn.maoookai.ems.to.LoginDTO;
 import cn.maoookai.ems.to.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,13 +30,13 @@ public class LoginController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/login")
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView) {
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @PostMapping("/login")
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView login(ModelAndView modelAndView, @Valid LoginDTO loginDTO, HttpSession session) {
 
         LoginVO loginVO = loginService.login(loginDTO);
@@ -50,11 +50,11 @@ public class LoginController {
         }
 
         if (loginVO.isAdmin()) {
-            modelAndView.setViewName("/admin/home");
+            modelAndView.setViewName("admin/home");
             session.setAttribute("admininfo", userService.getUserById(Long.parseLong(loginDTO.getId())));
         } else {
             session.setAttribute("userinfo", userService.getUserById(Long.parseLong(loginDTO.getId())));
-            modelAndView.setViewName("/user/home");
+            modelAndView.setViewName("user/home");
         }
         return modelAndView;
     }

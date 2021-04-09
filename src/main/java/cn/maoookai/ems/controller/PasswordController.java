@@ -22,35 +22,35 @@ public class PasswordController {
         this.passwordService = passwordService;
     }
 
-    @RequestMapping(value = "/user/password", method = RequestMethod.GET)
+    @RequestMapping(value = "user/password", method = RequestMethod.GET)
     public ModelAndView passwordUser(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/password");
+        modelAndView.setViewName("user/password");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user/password", method = RequestMethod.POST)
+    @RequestMapping(value = "user/password", method = RequestMethod.POST)
     public ModelAndView modifyPasswordUser(ModelAndView modelAndView, HttpSession session, PasswordVO vo) {
         PasswordDTO dto = new PasswordDTO();
         dto.setVo(vo);
         dto.setUser((User) session.getAttribute("userinfo"));
         modelAndView.addObject("result", passwordService.modifyPassword(dto));
-        modelAndView.setViewName("/user/password");
+        modelAndView.setViewName("user/password");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/password", method = RequestMethod.GET)
+    @RequestMapping(value = "admin/password", method = RequestMethod.GET)
     public ModelAndView passwordAdmin(ModelAndView modelAndView) {
-        modelAndView.setViewName("/admin/password");
+        modelAndView.setViewName("admin/password");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/password", method = RequestMethod.POST)
+    @RequestMapping(value = "admin/password", method = RequestMethod.POST)
     public ModelAndView modifyPasswordAdmin(ModelAndView modelAndView, HttpSession session, PasswordVO vo) {
         PasswordDTO dto = new PasswordDTO();
         dto.setVo(vo);
         dto.setUser((User) session.getAttribute("admininfo"));
         modelAndView.addObject("result", passwordService.modifyPassword(dto));
-        modelAndView.setViewName("/admin/password");
+        modelAndView.setViewName("admin/password");
         return modelAndView;
     }
 

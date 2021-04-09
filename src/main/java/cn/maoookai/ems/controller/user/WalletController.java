@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value = "/user", name = "用户钱包")
+@RequestMapping(value = "user", name = "用户钱包")
 public class WalletController {
 
     WalletService walletService;
@@ -21,7 +21,7 @@ public class WalletController {
 
     @RequestMapping(value = "/wallet")
     public ModelAndView wallet(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/wallet");
+        modelAndView.setViewName("user/wallet");
         return modelAndView;
     }
 
@@ -36,13 +36,13 @@ public class WalletController {
     public ModelAndView payment(ModelAndView modelAndView, @RequestParam(defaultValue = "0") int pageNum, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("wallets", walletService.paymentInfo(pageNum, user.getId()));
-        modelAndView.setViewName("/user/wallet/payment");
+        modelAndView.setViewName("user/wallet/payment");
         return modelAndView;
     }
 
     @RequestMapping(value = "/wallet/charge")
     public ModelAndView charge(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/wallet/charge");
+        modelAndView.setViewName("user/wallet/charge");
         return modelAndView;
     }
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value = "/user", name = "电费查询")
+@RequestMapping(value = "user", name = "电费查询")
 public class PriceController {
 
     PriceService priceService;
@@ -23,7 +23,7 @@ public class PriceController {
 
     @GetMapping(value = "/price")
     public ModelAndView bill(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.setViewName("/user/price");
+        modelAndView.setViewName("user/price");
         User user = (User) session.getAttribute("userinfo");
         session.setAttribute("currentPrice", priceService.currentPrice(user.isElectType()));
         session.setAttribute("currentType", priceService.electType(user.isElectType()));
@@ -37,7 +37,7 @@ public class PriceController {
         User user = (User) session.getAttribute("userinfo");
         session.removeAttribute("historyBill");
         session.setAttribute("historyBill", priceService.whichMonth(user.getId(), user.isElectType(), vo.getMonth()));
-        modelAndView.setViewName("/user/price");
+        modelAndView.setViewName("user/price");
         return modelAndView;
     }
 

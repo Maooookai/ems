@@ -26,7 +26,7 @@ public class IndexController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView index2(ModelAndView modelAndView, HttpSession session) {
         session.setAttribute("board", boardService.latestBoard());
         modelAndView.setViewName("login");

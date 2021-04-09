@@ -19,35 +19,35 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user/home", name = "用户主页")
+    @RequestMapping(value = "user/home", name = "用户主页")
     public ModelAndView userHome(ModelAndView modelAndView, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
         if (user.getId() == null)
-            modelAndView.setViewName("/login");
+            modelAndView.setViewName("login");
         else
-            modelAndView.setViewName("/user/home");
+            modelAndView.setViewName("user/home");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user/exit")
+    @RequestMapping(value = "user/exit")
     public ModelAndView exitUser(ModelAndView modelAndView, HttpSession session) {
         modelAndView.clear();
         session.removeAttribute("userinfo");
-        modelAndView.setViewName("/login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/exit")
+    @RequestMapping(value = "admin/exit")
     public ModelAndView exitAdmin(ModelAndView modelAndView, HttpSession session) {
         modelAndView.clear();
         session.removeAttribute("admininfo");
-        modelAndView.setViewName("/login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user/error")
+    @RequestMapping(value = "user/error")
     public ModelAndView error(ModelAndView modelAndView) {
-        modelAndView.setViewName("/login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
