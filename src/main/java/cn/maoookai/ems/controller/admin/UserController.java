@@ -2,6 +2,7 @@ package cn.maoookai.ems.controller.admin;
 
 import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.UserAddVO;
+import cn.maoookai.ems.to.UserSearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +47,20 @@ public class UserController {
     public ModelAndView all(ModelAndView modelAndView, @RequestParam(defaultValue = "0") int pageNum, HttpSession session) {
         session.removeAttribute("users");
         session.setAttribute("users", userService.list(pageNum));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/search", method = RequestMethod.GET)
+    public ModelAndView search(ModelAndView modelAndView) {
+        modelAndView.setViewName("admin/user/search");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/search", method = RequestMethod.POST)
+    public ModelAndView search(ModelAndView modelAndView, HttpSession session, UserSearchVO userSearchVO) {
+        session.removeAttribute("search");
+        session.setAttribute("search", userService.search(userSearchVO));
+        modelAndView.setViewName("admin/user/searchResult");
         return modelAndView;
     }
 

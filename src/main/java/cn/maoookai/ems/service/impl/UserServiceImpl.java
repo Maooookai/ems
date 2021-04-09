@@ -4,7 +4,7 @@ import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.repository.UserRepository;
 import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.UserAddVO;
-import cn.maoookai.ems.to.UserVO;
+import cn.maoookai.ems.to.UserSearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,14 +31,6 @@ public class UserServiceImpl implements UserService {
     public Page<User> list(int page) {
         Pageable pageable = PageRequest.of(page, 10, Sort.by("id").descending());
         return userRepository.findAll(pageable);
-    }
-
-    @Override
-    public UserVO info(long id) {
-        UserVO user = new UserVO();
-        if (userRepository.findById(id).isPresent())
-            user.setUsername(userRepository.findById(id).get().getName());
-        return user;
     }
 
     @Override
@@ -60,5 +54,37 @@ public class UserServiceImpl implements UserService {
         newUser.setIdNumber(vo.getIdNumber());
         newUser.setRegisterTime(simpleDateFormat.format(new Date()));
         userRepository.save(newUser);
+    }
+
+    @Override
+    public List<User> search(UserSearchVO vo) {
+        switch (vo.getBy()) {
+            case "id": {
+                if (!userRepository.findAllByIdContains(Long.valueOf(vo.getContent())).isEmpty())
+                    return userRepository.findAllByIdContains(Long.valueOf(vo.getContent()));
+                else return new ArrayList<>();
+            }
+            case "name": {
+                if (!userRepository.findAllByNameContains(vo.getContent()).isEmpty())
+                    return userRepository.findAllByNameContains(vo.getContent());
+                else return new ArrayList<>();
+            }
+            case "phone": {
+                if (!userRepository.findAllByPhoneNumberContains(vo.getContent()).isEmpty())
+                    return userRepository.findAllByPhoneNumberContains(vo.getContent());
+                else return new ArrayList<>();
+            }
+            case "address": {
+                if (!userRepository.findAllByAddressContains(vo.getContent()).isEmpty())
+                    return userRepository.findAllByAddressContains(vo.getContent());
+                else return new ArrayList<>();
+            }
+            case "idNumber": {
+                if (!userRepository.findAllByIdNumberContains(vo.getContent()).isEmpty())
+                    return userRepository.findAllByIdNumberContains(vo.getContent());
+                else return new ArrayList<>();
+            }
+        }
+        return new ArrayList<>();
     }
 }
