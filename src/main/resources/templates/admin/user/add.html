@@ -49,32 +49,31 @@
         <a class="btn btn-default" href="/admin/user/list" role="button">所有用户</a>&nbsp;&nbsp;&nbsp;
         <a class="btn btn-default" href="/admin/user/search" role="button">用户搜索</a>&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
-        <br><br>
         <h3>新增用户</h3><br>
-        <form method="post" th:action="@{/admin/user/add}" class="bs-example bs-example-form">
+        <form class="bs-example bs-example-form" method="post" th:action="@{/admin/user/add}">
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" placeholder="姓名" th:name="name" th:type="text" style="width: 280px">
+                <input class="form-control" placeholder="姓名" style="width: 280px" th:name="name" th:type="text">
             </div>
             <br>
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" placeholder="手机号码" th:name="phone" th:type="text" style="width: 280px">
+                <input class="form-control" placeholder="手机号码" style="width: 280px" th:name="phone" th:type="text">
             </div>
             <br>
 
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" placeholder="地址" th:name="address" th:type="text" style="width: 280px">
+                <input class="form-control" placeholder="地址" style="width: 280px" th:name="address" th:type="text">
             </div>
             <br>
             <div class="input-group col-md-offset-0">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-bookmark"></span></span>
                 <!--suppress HtmlFormInputWithoutLabel -->
-                <input class="form-control" placeholder="身份证号码" th:name="idNumber" th:type="text" style="width: 280px">
+                <input class="form-control" placeholder="身份证号码" style="width: 280px" th:name="idNumber" th:type="text">
             </div>
             <br>
             <div class="input-group col-md-offset-0">
@@ -84,16 +83,16 @@
             </div>
             <br>
             <span style="font-weight: bold">性别：</span>
-            <input type="radio" th:name="gender" value="男" id="男"/><label for="男">&nbsp;男&nbsp;</label>
-            <input type="radio" th:name="gender" value="女" id="女"/><label for="女">&nbsp;女</label>
+            <input id="男" th:name="gender" type="radio" value="男"/><label for="男">&nbsp;男&nbsp;</label>
+            <input id="女" th:name="gender" type="radio" value="女"/><label for="女">&nbsp;女</label>
             <br>
             <span style="font-weight: bold">用电：</span>
-            <input type="radio" th:name="electType" value=0 id="民用"/><label for="民用">&nbsp;民用&nbsp;</label>
-            <input type="radio" th:name="electType" value=1 id="商用"/><label for="商用">&nbsp;商用</label>
+            <input id="民用" th:name="electType" type="radio" value=0/><label for="民用">&nbsp;民用&nbsp;</label>
+            <input id="商用" th:name="electType" type="radio" value=1/><label for="商用">&nbsp;商用</label>
             <br>
             <span style="font-weight: bold">类型：</span>
-            <input type="radio" th:name="isAdmin" value=1 id="isAdmin"/><label for="isAdmin">&nbsp;管理员&nbsp;</label>
-            <input type="radio" th:name="isAdmin" value=0 id="isUser"/><label for="isUser">&nbsp;普通用户</label>
+            <input id="isAdmin" th:name="isAdmin" type="radio" value=1/><label for="isAdmin">&nbsp;管理员&nbsp;</label>
+            <input id="isUser" th:name="isAdmin" type="radio" value=0/><label for="isUser">&nbsp;普通用户</label>
             <br>
             <br>
             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;添加

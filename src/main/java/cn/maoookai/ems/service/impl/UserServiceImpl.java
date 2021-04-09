@@ -6,11 +6,14 @@ import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.UserAddVO;
 import cn.maoookai.ems.to.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,8 +26,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> list() {
-        return userRepository.findAll();
+    public Page<User> list(int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("id").descending());
+        return userRepository.findAll(pageable);
     }
 
     @Override

@@ -5,6 +5,7 @@ import cn.maoookai.ems.to.UserAddVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,13 +23,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user")
-    public ModelAndView user(ModelAndView modelAndView){
+    public ModelAndView user(ModelAndView modelAndView) {
         modelAndView.setViewName("/admin/user");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user/add",method = RequestMethod.GET)
-    public ModelAndView add(ModelAndView modelAndView){
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+    public ModelAndView add(ModelAndView modelAndView) {
         modelAndView.setViewName("/admin/user/add");
         return modelAndView;
     }
@@ -36,7 +37,15 @@ public class UserController {
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public ModelAndView add(ModelAndView modelAndView, HttpSession session, UserAddVO vo) {
         userService.add(vo);
+        session.removeAttribute("addResult");
         session.setAttribute("addResult", "添加用户成功！");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/list")
+    public ModelAndView all(ModelAndView modelAndView, @RequestParam(defaultValue = "0") int pageNum, HttpSession session) {
+        session.removeAttribute("users");
+        session.setAttribute("users", userService.list(pageNum));
         return modelAndView;
     }
 
