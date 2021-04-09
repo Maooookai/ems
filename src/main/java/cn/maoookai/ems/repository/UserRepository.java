@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @NotNull Optional<User> findById(@NotNull Long id);
 
-    List<User> findAllByIdContains(Long id);
+    List<User> findAllById(Long id);
 
     List<User> findAllByNameContains(String name);
 

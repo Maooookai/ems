@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
     public List<User> search(UserSearchVO vo) {
         switch (vo.getBy()) {
             case "id": {
-                if (!userRepository.findAllByIdContains(Long.valueOf(vo.getContent())).isEmpty())
-                    return userRepository.findAllByIdContains(Long.valueOf(vo.getContent()));
+                if (!userRepository.findAllById(Long.valueOf(vo.getContent())).isEmpty())
+                    return userRepository.findAllById(Long.valueOf(vo.getContent()));
                 else return new ArrayList<>();
             }
             case "name": {
