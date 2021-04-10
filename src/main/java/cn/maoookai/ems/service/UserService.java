@@ -2,6 +2,7 @@ package cn.maoookai.ems.service;
 
 import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.to.UserAddVO;
+import cn.maoookai.ems.to.UserEditVO;
 import cn.maoookai.ems.to.UserSearchVO;
 import cn.maoookai.ems.to.UserVO;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ public interface UserService {
     User getUserById(long id);
 
     void add(UserAddVO vo);
+
+    void edit(UserEditVO vo,Long id);
 
     List<User> search(UserSearchVO vo);
 

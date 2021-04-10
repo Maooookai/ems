@@ -37,8 +37,18 @@ public class HomeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "admin/home", name = "用户主页")
+    public ModelAndView adminHome(ModelAndView modelAndView, HttpSession session) {
+        User user = (User) session.getAttribute("adminInfo");
+        if (user.getId() == null)
+            modelAndView.setViewName("login");
+        else
+            modelAndView.setViewName("admin/home");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "admin/exit")
-    public ModelAndView exitAdmin(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView adminExit(ModelAndView modelAndView, HttpSession session) {
         modelAndView.clear();
         session.removeAttribute("admininfo");
         modelAndView.setViewName("login");

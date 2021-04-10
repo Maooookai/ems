@@ -1,7 +1,9 @@
 package cn.maoookai.ems.controller.admin;
 
+import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.UserAddVO;
+import cn.maoookai.ems.to.UserEditVO;
 import cn.maoookai.ems.to.UserSearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +63,21 @@ public class UserController {
         session.removeAttribute("search");
         session.setAttribute("search", userService.search(userSearchVO));
         modelAndView.setViewName("admin/user/searchResult");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/edit",method = RequestMethod.GET)
+    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, String editId) {
+        modelAndView.setViewName("admin/user/edit");
+        session.setAttribute("editInfo", userService.getUserById(Long.parseLong(editId)));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/edit",method = RequestMethod.POST)
+    public ModelAndView edit(ModelAndView modelAndView,HttpSession session, UserEditVO vo){
+        User user = (User) session.getAttribute("editInfo");
+        userService.edit(vo, user.getId());
+        modelAndView.setViewName("admin/user/list");
         return modelAndView;
     }
 

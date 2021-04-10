@@ -69,7 +69,7 @@
                     <td th:text="${search.registerTime}"></td>
                     <td style="width: 20px">
                         <form method="post" th:action="@{/admin/user/edit}">
-                            <input class="btn btn-default" th:name="search" th:value="${search.id}" type="hidden"/>
+                            <input class="btn btn-default" th:name="editId" th:value="${search.id}" type="hidden"/>
                             <button class="btn btn-default" type="submit">编辑</button>
                         </form>
                     </td>

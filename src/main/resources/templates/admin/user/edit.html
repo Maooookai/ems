@@ -1,9 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户编辑 - 管理员</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin/home">后台管理 Management</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-default">
+                <li><a href="/admin/user">用户管理</a></li>
+                <li><a href="/admin/price">电费管理</a></li>
+                <li><a href="/admin/board">公告管理</a></li>
+            </ul>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        欢迎您，<span th:text="${session.admininfo.name}">请登录</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/profile">个人资料</a></li>
+                        <li><a href="/admin/password">修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/admin/exit">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <h2>用户管理</h2>
+        <h5>User Management</h5>
+        <a class="btn btn-default" href="/admin/user/add" role="button">新增用户</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-default" href="/admin/user/list" role="button">所有用户</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-default" href="/admin/user/search" role="button">用户搜索</a>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
+        <h3>用户编辑</h3>
+        <form class="bs-example bs-example-form" method="post" th:action="@{/admin/user/edit}">
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input class="form-control" placeholder="姓名" style="width: 280px" th:name="name" th:type="text" th:value="${session.editInfo.name}">
+            </div>
+            <br>
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input class="form-control" placeholder="手机号码" style="width: 280px" th:name="phone" th:type="text" th:value="${session.editInfo.phoneNumber}">
+            </div>
+            <br>
+
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input class="form-control" placeholder="地址" style="width: 280px" th:name="address" th:type="text" th:value="${session.editInfo.address}">
+            </div>
+            <br>
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-bookmark"></span></span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input class="form-control" placeholder="身份证号码" style="width: 280px" th:name="idNumber" th:type="text" th:value="${session.editInfo.idNumber}">
+            </div>
+            <br>
+            <div class="input-group col-md-offset-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input class="form-control" placeholder="密码" style="width: 280px" th:name="password" th:type="password">
+            </div>
+            <br>
+            <span style="font-weight: bold" th:value="${session.editInfo.gender}">性别：</span>
+            <input id="男" th:name="gender" type="radio" value="男"/><label for="男">&nbsp;男&nbsp;</label>
+            <input id="女" th:name="gender" type="radio" value="女"/><label for="女">&nbsp;女</label>
+            <br>
+            <span style="font-weight: bold" th:value="${session.editInfo.isElectType()}">用电：</span>
+            <input id="民用" th:name="electType" type="radio" value=0><label for="民用">&nbsp;民用&nbsp;</label>
+            <input id="商用" th:name="electType" type="radio" value=1><label for="商用">&nbsp;商用</label>
+            <br>
+            <br>
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;修改
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;重置
+            </button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

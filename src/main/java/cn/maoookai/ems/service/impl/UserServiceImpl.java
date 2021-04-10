@@ -4,6 +4,7 @@ import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.repository.UserRepository;
 import cn.maoookai.ems.service.UserService;
 import cn.maoookai.ems.to.UserAddVO;
+import cn.maoookai.ems.to.UserEditVO;
 import cn.maoookai.ems.to.UserSearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,6 +55,19 @@ public class UserServiceImpl implements UserService {
         newUser.setIdNumber(vo.getIdNumber());
         newUser.setRegisterTime(simpleDateFormat.format(new Date()));
         userRepository.save(newUser);
+    }
+
+    @Override
+    public void edit(UserEditVO vo, Long id) {
+        User user = userRepository.getOne(id);
+        user.setName(vo.getName());
+        user.setPhoneNumber(vo.getPhone());
+        user.setIdNumber(vo.getIdNumber());
+        user.setElectType(vo.isElectType());
+        user.setPassword(vo.getPassword());
+        user.setGender(vo.getGender());
+        user.setAddress(vo.getAddress());
+        userRepository.save(user);
     }
 
     @Override
