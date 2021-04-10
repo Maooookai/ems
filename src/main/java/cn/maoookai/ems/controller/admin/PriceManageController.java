@@ -1,6 +1,7 @@
 package cn.maoookai.ems.controller.admin;
 
 import cn.maoookai.ems.service.PriceService;
+import cn.maoookai.ems.to.PriceEditVO;
 import cn.maoookai.ems.to.PriceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class PriceManageController {
     @RequestMapping(value = "admin/price", method = RequestMethod.GET)
     public ModelAndView price(ModelAndView modelAndView, HttpSession session) {
         PriceVO vo = new PriceVO();
+        session.removeAttribute("currentPrice");
         vo.setCivil(priceService.currentPrice(false).getPrice());
         vo.setCommercial(priceService.currentPrice(true).getPrice());
         session.setAttribute("currentPrice", vo);
@@ -30,4 +32,10 @@ public class PriceManageController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "admin/price", method = RequestMethod.POST)
+    public ModelAndView price(ModelAndView modelAndView, PriceEditVO vo) {
+        priceService.editPrice(vo);
+        modelAndView.setViewName("admin/price");
+        return modelAndView;
+    }
 }

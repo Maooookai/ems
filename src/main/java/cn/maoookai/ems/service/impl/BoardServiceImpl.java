@@ -51,4 +51,11 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
+    @Override
+    public void edit(Long id, String content) {
+        Board board = boardRepository.getOne(id);
+        board.setContent(content);
+        boardRepository.save(board);
+    }
+
 }

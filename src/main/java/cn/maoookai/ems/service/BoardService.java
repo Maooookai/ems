@@ -12,4 +12,6 @@ public interface BoardService {
 
     Board getBoard(Long id);
 
+    void edit(Long id,String content);
+
 }

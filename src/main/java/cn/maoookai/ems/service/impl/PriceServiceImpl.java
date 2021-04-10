@@ -6,6 +6,7 @@ import cn.maoookai.ems.repository.CurrentUsageRepository;
 import cn.maoookai.ems.repository.HistoryUsageRepository;
 import cn.maoookai.ems.repository.PriceRepository;
 import cn.maoookai.ems.service.PriceService;
+import cn.maoookai.ems.to.PriceEditVO;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -95,4 +96,15 @@ public class PriceServiceImpl implements PriceService {
 
     }
 
+    @Override
+    public void editPrice(PriceEditVO vo) {
+        if (!vo.getNewPrice().isEmpty()) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+            Price newPrice = new Price();
+            newPrice.setPrice(vo.getNewPrice());
+            newPrice.setElectType(vo.isElectType());
+            newPrice.setDate(simpleDateFormat.format(new Date()));
+            priceRepository.save(newPrice);
+        }
+    }
 }

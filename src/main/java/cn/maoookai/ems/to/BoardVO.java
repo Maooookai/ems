@@ -14,4 +14,5 @@ public class BoardVO {
 
     @NotNull
     private String content;
+
 }
