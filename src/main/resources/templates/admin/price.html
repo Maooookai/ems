@@ -41,5 +41,13 @@
         </div>
     </div>
 </nav>
+<div class="container">
+    <div class="jumbotron">
+        <h2>电费管理</h2>
+        <h5>Electricity Price Management</h5>
+        <h3>当前民用电价：<span th:text="${session.currentPrice.civil}"></span>元/千瓦时</h3>
+        <h3>当前民用电价：<span th:text="${session.currentPrice.commercial}"></span>元/千瓦时</h3>
+    </div>
+</div>
 </body>
 </html>

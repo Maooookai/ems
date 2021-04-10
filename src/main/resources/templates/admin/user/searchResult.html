@@ -49,7 +49,7 @@
         <a class="btn btn-default" href="/admin/user/list" role="button">所有用户</a>&nbsp;&nbsp;&nbsp;
         <a class="btn btn-default active" href="/admin/user/search" role="button">用户搜索</a>&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
-        <h3>所有用户</h3>
+        <h3>搜索结果</h3>
         <div class="with:80%">
             <table class="table table-hover">
                 <thead>
@@ -68,7 +68,7 @@
                     <td th:text="${search.phoneNumber}"></td>
                     <td th:text="${search.registerTime}"></td>
                     <td style="width: 20px">
-                        <form method="post" th:action="@{/admin/user/edit}">
+                        <form method="get" th:action="@{/admin/user/edit}">
                             <input class="btn btn-default" th:name="editId" th:value="${search.id}" type="hidden"/>
                             <button class="btn btn-default" type="submit">编辑</button>
                         </form>
