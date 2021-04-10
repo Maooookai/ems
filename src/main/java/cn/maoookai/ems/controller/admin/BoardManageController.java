@@ -1,5 +1,6 @@
 package cn.maoookai.ems.controller.admin;
 
+import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.service.BoardService;
 import cn.maoookai.ems.to.BoardEditVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,29 @@ public class BoardManageController {
         modelAndView.setViewName("admin/boardInfo");
         boardService.edit(vo.getBoardId(), vo.getContent());
         session.setAttribute("board", boardService.getBoard(vo.getBoardId()));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "admin/boardAdd", method = RequestMethod.GET)
+    public ModelAndView boardAdd(ModelAndView modelAndView) {
+        modelAndView.setViewName("admin/boardAdd");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "admin/boardAdd", method = RequestMethod.POST)
+    public ModelAndView boardAdd(ModelAndView modelAndView, HttpSession session, String content) {
+        modelAndView.setViewName("admin/board");
+        User user = (User) session.getAttribute("admininfo");
+        boardService.add(user.getId(), content);
+        session.setAttribute("boards", boardService.boards(0));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "admin/boardDelete", method = RequestMethod.POST)
+    public ModelAndView boardDelete(ModelAndView modelAndView,HttpSession session, Long boardId){
+        modelAndView.setViewName("admin/board");
+        boardService.delete(boardId);
+        session.setAttribute("boards", boardService.boards(0));
         return modelAndView;
     }
 

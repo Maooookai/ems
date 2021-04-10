@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -53,8 +56,27 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void edit(Long id, String content) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         Board board = boardRepository.getOne(id);
         board.setContent(content);
+        board.setUpdateTime(simpleDateFormat.format(new Date()));
+        boardRepository.save(board);
+    }
+
+    @Override
+    public void add(Long id, String content) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        Board board = new Board();
+        board.setContent(content);
+        board.setUserId(id);
+        board.setUpdateTime(simpleDateFormat.format(new Date()));
+        boardRepository.save(board);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Board board = boardRepository.getOne(id);
+        board.setDeleted(true);
         boardRepository.save(board);
     }
 

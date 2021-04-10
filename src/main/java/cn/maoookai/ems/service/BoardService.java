@@ -14,4 +14,8 @@ public interface BoardService {
 
     void edit(Long id,String content);
 
+    void add(Long id,String content);
+
+    void delete(Long id);
+
 }
