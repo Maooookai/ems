@@ -27,9 +27,9 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardVO latestBoard() {
         BoardVO boardVO = new BoardVO();
-        if (boardRepository.findFirstByContentIsNotNullOrderByUpdateTimeDesc().isPresent()) {
-            boardVO.setContent(boardRepository.findFirstByContentIsNotNullOrderByUpdateTimeDesc().get().getContent());
-            boardVO.setTime(boardRepository.findFirstByContentIsNotNullOrderByUpdateTimeDesc().get().getUpdateTime());
+        if (boardRepository.findFirstByDeletedFalseAndContentIsNotNullOrderByUpdateTimeDesc().isPresent()) {
+            boardVO.setContent(boardRepository.findFirstByDeletedFalseAndContentIsNotNullOrderByUpdateTimeDesc().get().getContent());
+            boardVO.setTime(boardRepository.findFirstByDeletedFalseAndContentIsNotNullOrderByUpdateTimeDesc().get().getUpdateTime());
         } else {
             boardVO.setContent("暂无公告");
             boardVO.setTime("");

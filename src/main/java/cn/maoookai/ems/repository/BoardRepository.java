@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-    Optional<Board> findFirstByContentIsNotNullOrderByUpdateTimeDesc();
+    Optional<Board> findFirstByDeletedFalseAndContentIsNotNullOrderByUpdateTimeDesc();
 
     Page<Board> findAllByDeletedFalse(Pageable pageable);
 

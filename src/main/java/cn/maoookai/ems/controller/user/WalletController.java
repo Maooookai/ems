@@ -3,6 +3,7 @@ package cn.maoookai.ems.controller.user;
 import cn.maoookai.ems.entity.User;
 import cn.maoookai.ems.service.WalletService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,7 @@ public class WalletController {
     @RequestMapping(value = "/wallet/balance")
     public ModelAndView balance(ModelAndView modelAndView, HttpSession session) {
         User user = (User) session.getAttribute("userinfo");
+        session.removeAttribute("balance");
         session.setAttribute("balance", walletService.currentBalance(user.getId()));
         return modelAndView;
     }
@@ -40,9 +42,17 @@ public class WalletController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/wallet/charge")
+    @RequestMapping(value = "/wallet/charge", method = RequestMethod.GET)
     public ModelAndView charge(ModelAndView modelAndView) {
         modelAndView.setViewName("user/wallet/charge");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/wallet/charge", method = RequestMethod.POST)
+    public ModelAndView charge(ModelAndView modelAndView, HttpSession session, String money) {
+        User user = (User) session.getAttribute("userinfo");
+        walletService.charge(user.getId(), money);
+        modelAndView.setViewName("user/wallet/balance");
         return modelAndView;
     }
 

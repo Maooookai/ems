@@ -9,4 +9,6 @@ public interface WalletService {
 
     Page<Wallet> paymentInfo(int page, Long id);
 
+    void charge(Long id,String bill);
+
 }

@@ -50,7 +50,13 @@
         <a class="btn btn-default" href="/user/wallet/payment" role="button">账单查询</a>&nbsp;&nbsp;&nbsp;
         <a class="btn btn-default active" href="/user/wallet/charge" role="button">余额充值</a>&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger" onclick="history.go(-1)">返回</button>
-        <h1>充值功能暂未开放！</h1>
+        <br><br>
+        <h3>余额充值</h3>
+        <form method="post" th:action="@{/user/wallet/charge}">
+            <input type="text" style="width: 180px" th:name="money" class="form-control" placeholder="请输入充值金额" oninput="value=value.replace(/[^0-9.]/g,'')">
+            <br>
+            <button type="submit" class="btn btn-info">充值</button>
+        </form>
     </div>
 </div>
 </body>
